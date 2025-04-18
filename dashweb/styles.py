@@ -13,7 +13,7 @@ STYLESHEETS = [
 
 STYLE = {
     "font_family": "JetBrains Mono",
-    "font_size": "18px",
+    "font_size": "16px",
     "background": Color.BG.value,
     "color": Color.TEXT.value,
 }

@@ -1,19 +1,22 @@
 import reflex as rx
 
-from dashweb.components.navbar import navbar
-from dashweb.components.chart import chartline
+from dashweb.components.layout import layout
+from dashweb.components.chart import chartline_card, State
 
-# Page-specific styles
-# index_style = {
-#     "width": "100%",
-#     "height": "100vh",
-#     "spacing": "0",
-# }
-
-@rx.page(route='/', title='Home')
+@rx.page(route='/', title='Home', on_load=State.on_load)
 def index() -> rx.Component:
-    return rx.hstack(
-        navbar(),
-        chartline(),
-
+    return layout(
+        rx.box(
+            chartline_card(),
+            grid_column="1 / span 2",  # ocupa las 2 columnas
+        ),
+        # # Ejemplo: agregar un insight abajo ocupando 1 columna
+        # rx.box(
+        #     insight_card_1(),
+        #     grid_column="1 / span 1",
+        # ),
+        # rx.box(
+        #     insight_card_2(),
+        #     grid_column="2 / span 1",
+        # )
     )

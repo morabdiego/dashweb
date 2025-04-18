@@ -1,39 +1,83 @@
 import reflex as rx
 from pyBCRAdata import monetary
-import pandas as pd
-from datetime import datetime, timedelta
 
-# Calculate dates
-today = datetime.now().strftime('%Y-%m-%d')
-three_months_ago = (datetime.now() - timedelta(days=90)).strftime('%Y-%m-%d')
+from dashweb.styles import Color
 
-data = monetary.series(id_variable="1", desde=three_months_ago, hasta=today)[['fecha', 'valor']]
-data['fecha'] = data['fecha'].dt.strftime('%Y-%m-%d')
-# Sort data by date in ascending order (oldest first)
-data = data.sort_values(by='fecha', ascending=True)
-data = data.to_dict(orient="records")
+# Preparar listas y diccionario
+variables = monetary.variables()
+list_id = variables['idVariable'].to_list()
+list_label = variables['descripcion'].to_list()
+variable_dict = dict(zip(list_label, list_id))
 
+class State(rx.State):
+    selected_desc: str = list_label[0]
+    series_data: list[dict] = []
+
+    @rx.event
+    def set_series(self, value: str):
+        self.selected_desc = value
+        id_variable = variable_dict[value]
+        df = monetary.series(id_variable=id_variable)[['fecha', 'valor']]
+        df['fecha'] = df['fecha'].dt.strftime('%Y-%m-%d')
+        df = df.sort_values(by='fecha', ascending=True)
+        self.series_data = df.to_dict(orient='records')
+
+    @rx.event
+    def on_load(self):
+        self.set_series(self.selected_desc)
 
 def chartline():
     return rx.recharts.line_chart(
-            rx.recharts.line(
-                data_key="valor",
-                type_="monotone",
-                # stroke="#8884d8",
-                dot=False,
+        rx.recharts.line(
+            data_key="valor",
+            type_="monotone",
+            stroke="#8884d8",
+            dot=False,
+        ),
+        rx.recharts.x_axis(
+            data_key="fecha",
+            angle=90,
+            interval='preserveStartEnd',
+            text_anchor='start',
+            min_tick_gap=15,
+        ),
+        rx.recharts.brush(
+            data_key="fecha",
+            height=30,
+            stroke="#8884d8",
+            y=575,
+        ),
+        rx.recharts.y_axis(),
+        rx.recharts.graphing_tooltip(),
+        data=State.series_data,
+        height=600,
+        margin={
+            "top": 75,
+            "right": 150,
+            "bottom": 100,
+            "left": 150,
+        },
+    )
+
+def chartline_card():
+    return rx.box(
+        rx.center(
+            rx.select(
+                list(variable_dict.keys()),
+                on_change=State.set_series,
+                value=State.selected_desc,
+                placeholder="Seleccionar serie...",
+                margin_bottom="1em",
+                width='75%'
             ),
-            rx.recharts.x_axis(
-                data_key="fecha",
-                angle=90,
-            ),
-            rx.recharts.brush(
-                data_key="fecha", height=30, stroke="#8884d8"
-            ),
-            rx.recharts.y_axis(),
-            rx.recharts.cartesian_grid(stroke_dasharray="3 3"),
-            rx.recharts.graphing_tooltip(),
-            # rx.recharts.legend(),
-            data=data,
-            # width="auto",
-            height=500,
-        )
+        ),
+        rx.center(
+            chartline()
+        ),
+        bg=Color.TEXT,
+        border_radius="12px",
+        # box_shadow="md",
+        padding="2em",
+        width="100%",
+        height="100%",
+    )
