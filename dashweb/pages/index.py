@@ -10,6 +10,14 @@ def index() -> rx.Component:
             chartline_card(),
             grid_column="1 / span 2",  # ocupa las 2 columnas
         ),
+        rx.box(
+            chartline_card(),
+            grid_column="1 / span 2",  # ocupa las 2 columnas
+        ),
+        rx.box(
+            chartline_card(),
+            grid_column="1 / span 2",  # ocupa las 2 columnas
+        )
         # # Ejemplo: agregar un insight abajo ocupando 1 columna
         # rx.box(
         #     insight_card_1(),

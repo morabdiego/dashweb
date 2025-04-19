@@ -94,10 +94,10 @@ def navbar() -> rx.Component:
     return rx.box(
         rx.vstack(
             logo(),
-            rx.spacer(),
             navlinks(),
-            rx.spacer(),
             docslinks(),
+            height="100vh",
+            justify="between"
         ),
         position="fixed",
         left="0",

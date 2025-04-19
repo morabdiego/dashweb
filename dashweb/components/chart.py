@@ -26,9 +26,9 @@ class State(rx.State):
     def on_load(self):
         self.set_series(self.selected_desc)
 
-def chartline():
-    return rx.recharts.line_chart(
-        rx.recharts.line(
+def chart():
+    return rx.recharts.area_chart(
+        rx.recharts.area(
             data_key="valor",
             type_="monotone",
             stroke="#8884d8",
@@ -68,11 +68,12 @@ def chartline_card():
                 value=State.selected_desc,
                 placeholder="Seleccionar serie...",
                 margin_bottom="1em",
-                width='75%'
+                width='75%',
+                # style={"font_size": "32px", "font_family": "JetBrains Mono"}
             ),
         ),
         rx.center(
-            chartline()
+            chart()
         ),
         bg=Color.TEXT,
         border_radius="12px",

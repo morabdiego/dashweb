@@ -1,3 +1,4 @@
+import reflex as rx
 from enum import Enum
 
 # Color scheme - ColorHunt Palette https://colorhunt.co/palette/3936464f45576d5d6ef4eee0
@@ -13,7 +14,10 @@ STYLESHEETS = [
 
 STYLE = {
     "font_family": "JetBrains Mono",
-    "font_size": "16px",
+    "font_size": "18px",
     "background": Color.BG.value,
     "color": Color.TEXT.value,
+        rx.select: {
+        "font_size": "20px",
+    }
 }
