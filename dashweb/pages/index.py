@@ -1,21 +1,21 @@
 import reflex as rx
 
 from dashweb.components.layout import layout
-from dashweb.components.chart import chartline_card, State
+from dashweb.components.chart import chart_card, State
 
 @rx.page(route='/', title='Home', on_load=State.on_load)
 def index() -> rx.Component:
     return layout(
         rx.box(
-            chartline_card(),
+            chart_card(),
             grid_column="1 / span 2",  # ocupa las 2 columnas
         ),
         rx.box(
-            chartline_card(),
+            chart_card(),
             grid_column="1 / span 2",  # ocupa las 2 columnas
         ),
         rx.box(
-            chartline_card(),
+            chart_card(),
             grid_column="1 / span 2",  # ocupa las 2 columnas
         )
         # # Ejemplo: agregar un insight abajo ocupando 1 columna

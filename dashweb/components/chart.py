@@ -32,6 +32,13 @@ def chart():
             data_key="valor",
             type_="monotone",
             stroke="#8884d8",
+            fill="#8884d8",
+            fill_opacity=0.5,
+            active_dot={
+                "r": 8,
+                "stroke": "#8884d8",
+                "stroke_width": 2,
+            },
             dot=False,
         ),
         rx.recharts.x_axis(
@@ -59,25 +66,26 @@ def chart():
         },
     )
 
-def chartline_card():
-    return rx.box(
-        rx.center(
-            rx.select(
-                list(variable_dict.keys()),
-                on_change=State.set_series,
-                value=State.selected_desc,
-                placeholder="Seleccionar serie...",
-                margin_bottom="1em",
-                width='75%',
-                # style={"font_size": "32px", "font_family": "JetBrains Mono"}
-            ),
+def chart_selector():
+    return rx.center(
+        rx.select(
+            list(variable_dict.keys()),
+            on_change=State.set_series,
+            value=State.selected_desc,
+            placeholder="Seleccionar serie...",
+            margin_bottom="1em",
+            width='75%',
         ),
+    )
+
+def chart_card():
+    return rx.box(
+        chart_selector(),
         rx.center(
             chart()
         ),
         bg=Color.TEXT,
         border_radius="12px",
-        # box_shadow="md",
         padding="2em",
         width="100%",
         height="100%",
