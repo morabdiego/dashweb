@@ -1,30 +1,12 @@
 import reflex as rx
 
-from dashweb.components.layout import layout
+from dashweb.components.layout_solapa import layout_solapa
 from dashweb.components.chart import chart_card, State
 
 @rx.page(route='/', title='Home', on_load=State.on_load)
 def index() -> rx.Component:
-    return layout(
+    return layout_solapa(
         rx.box(
-            chart_card(),
-            grid_column="1 / span 2",  # ocupa las 2 columnas
-        ),
-        rx.box(
-            chart_card(),
-            grid_column="1 / span 2",  # ocupa las 2 columnas
-        ),
-        rx.box(
-            chart_card(),
-            grid_column="1 / span 2",  # ocupa las 2 columnas
+            chart_card()
+            ),
         )
-        # # Ejemplo: agregar un insight abajo ocupando 1 columna
-        # rx.box(
-        #     insight_card_1(),
-        #     grid_column="1 / span 1",
-        # ),
-        # rx.box(
-        #     insight_card_2(),
-        #     grid_column="2 / span 1",
-        # )
-    )
