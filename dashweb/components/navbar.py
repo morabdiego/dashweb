@@ -9,11 +9,13 @@ def logo() -> rx.Component:
             rx.image(
                 height="60px",
                 width="auto",
-                src="/logo.png",  # Replace with actual logo path
+                src="/logo.png",
                 alt="Logo",
             ),
             rx.text(
-                "pyBCRAdata"
+                "pyBCRAdata",
+                font_weight="bold",
+                font_size="1.2em",
             ),
             spacing="3",
             align_items="center",
@@ -22,22 +24,37 @@ def logo() -> rx.Component:
     )
 
 def navitem(icon: str, text: str, href: str) -> rx.Component:
-    """Create a navigation item with consistent styling.
+    """Create a navigation item with consistent styling and active state.
 
     Args:
         icon: The name of the icon to display
         text: The text to display next to the icon
         href: The URL to navigate to when clicked
     """
+    is_active = rx.State.router.page.path == href
+    
     return rx.link(
         rx.hstack(
             rx.icon(
                 icon,
-                color=Color.TEXT.value,
+                color=rx.cond(
+                    is_active,
+                    Color.ACCENT.value,
+                    Color.TEXT.value,
+                ),
             ),
             rx.text(
                 text,
-                color=Color.TEXT.value,
+                color=rx.cond(
+                    is_active,
+                    Color.ACCENT.value,
+                    Color.TEXT.value,
+                ),
+                font_weight=rx.cond(
+                    is_active,
+                    "bold",
+                    "normal",
+                ),
             ),
             spacing="3",
         ),
@@ -45,7 +62,19 @@ def navitem(icon: str, text: str, href: str) -> rx.Component:
         width="100%",
         padding="0.7em 1em",
         border_radius="1.5rem",
-        _hover={"bg": Color.ACCENT.value},
+        bg=rx.cond(
+            is_active,
+            f"{Color.ACCENT.value}20",  # Versión transparente del color de acento
+            "transparent",
+        ),
+        _hover={
+            "bg": rx.cond(
+                is_active,
+                f"{Color.ACCENT.value}30",  # Versión más oscura para hover
+                Color.ACCENT.value,
+            )
+        },
+        transition="all 0.2s ease",
     )
 
 def navlinks() -> rx.Component:
@@ -76,7 +105,14 @@ def docsitem(icon: str, href: str) -> rx.Component:
         ),
         href=href,
         is_external=True,
-        _hover={"opacity": 0.8},
+        padding="0.5em",
+        border_radius="md",
+        _hover={
+            "bg": f"{Color.ACCENT.value}20", 
+            "color": Color.ACCENT.value,
+            "transform": "scale(1.1)",
+        },
+        transition="all 0.2s ease",
     )
 
 def docslinks() -> rx.Component:
@@ -95,9 +131,11 @@ def navbar() -> rx.Component:
         rx.vstack(
             logo(),
             navlinks(),
+            rx.spacer(),  # Empuja los enlaces de documentación hacia abajo
             docslinks(),
             height="100vh",
-            justify="between"
+            justify="start",  # Cambio a start para que el contenido se ajuste mejor
+            padding_bottom="2em",  # Añade espacio en la parte inferior
         ),
         position="fixed",
         left="0",
@@ -107,5 +145,6 @@ def navbar() -> rx.Component:
         bg=Color.ALTBG.value,
         border_top_right_radius="1.5rem",
         border_bottom_right_radius="1.5rem",
-        z_index="1000",  # opcional para asegurarse de que esté por encima
+        z_index="1000",
+        box_shadow="2px 0 8px rgba(0,0,0,0.15)",
     )
