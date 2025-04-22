@@ -50,7 +50,7 @@ def chart():
         ),
         rx.recharts.brush(
             data_key="fecha",
-            height=30,
+            height=20,
             stroke="#8884d8",
             y=575,
         ),
