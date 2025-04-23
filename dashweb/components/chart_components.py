@@ -1,7 +1,7 @@
 import reflex as rx
 from dashweb.styles import Color
 
-def create_area_chart(data, color="#8884d8"):
+def create_area_chart(data, color="#8884d8", labelx="fecha", labely="valor"):
     """
     Create a reusable area chart with consistent styling
     
@@ -11,7 +11,7 @@ def create_area_chart(data, color="#8884d8"):
     """
     return rx.recharts.area_chart(
         rx.recharts.area(
-            data_key="valor",
+            data_key=labely,
             type_="monotone",
             stroke=color,
             fill=color,
@@ -24,14 +24,14 @@ def create_area_chart(data, color="#8884d8"):
             dot=False,
         ), 
         rx.recharts.x_axis(
-            data_key="fecha",
+            data_key=labelx,
             angle=90,
             interval='preserveEnd',
             text_anchor='start',
             min_tick_gap=15,
         ), 
         rx.recharts.y_axis(
-            data_key="valor",
+            data_key=labely,
             angle=45
         ), 
         rx.recharts.graphing_tooltip(), 

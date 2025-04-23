@@ -1,14 +1,10 @@
 # import pandas as pd
 from pyBCRAdata import currency
 
-moneda = 'USD'
-df = currency.series(
-    moneda=moneda,
-    fechadesde='2023-01-01',
-    fechahasta='2023-10-01'
-)[['fecha', 'detalle_tipoCotizacion']]
-df['fecha'] = df['fecha'].dt.strftime('%Y-%m-%d')
-df = df.sort_values(by='fecha', ascending=True)
-fetch = df.to_dict(orient='records')
+currencies = currency.currencies()
+currency_codes = currencies['codigo'].to_list()
+currency_names = currencies['denominacion'].to_list()
+currency_dict = dict(zip(currency_names, currency_codes))
 
-print(fetch)
+
+print(currency_dict)

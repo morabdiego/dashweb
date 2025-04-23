@@ -6,15 +6,16 @@ from dashweb.components.chart_components import create_area_chart, create_select
 
 def currency_chart():
     """Generate currency exchange chart"""
-    return create_area_chart(data=CurrencyState.currency_data, color="#8884d8")
+    return create_area_chart(data=CurrencyState.data, color="#8884d8",
+                             labely="detalle_tipoCotizacion")
 
 def currency_selector():
     """Generate currency exchange selector"""
     return create_selector(
         title="Tipo de Cambio:", 
         options=currency_names,
-        selected_value=CurrencyState.selected_currency,
-        on_select=CurrencyState.set_currency,
+        selected_value=CurrencyState.selected_item,
+        on_select=CurrencyState.set_selected_item,
         start_date=CurrencyState.start_date,
         on_start_date_change=CurrencyState.set_currency_start_date,
         end_date=CurrencyState.end_date,
