@@ -2,24 +2,10 @@ import reflex as rx
 
 from dashweb.components.layout import layout
 from dashweb.components.md_install import md_install
+from dashweb.components.page_content_box import page_content_box  # Import the new component
 
 @rx.page(route="/install", title="Instalación de pyBCRAdata")
 def install() -> rx.Component:
     return layout(
-        rx.box(
-            rx.box(
-                md_install(),
-                # bg="white",
-                border_radius="lg",
-                padding="6",
-                shadow="md",
-                width="100%",
-                max_width=["95%", "95%", "600px"],  # Responsivo: más estrecho en móviles
-            ),
-            width="100%",
-            display="flex",
-            flex_direction="column",
-            align_items="center",
-            margin="0 auto",
-        ),
+        page_content_box(md_install)  # Use the reusable component
     )
