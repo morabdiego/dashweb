@@ -1,6 +1,19 @@
 import reflex as rx
 from dashweb.styles import Color
 
+def hover_icon():
+    return rx.hover_card.root(
+        rx.hover_card.trigger(
+            rx.icon("badge_info", color="indigo"),
+        ),
+        rx.hover_card.content(
+            rx.text(
+                "La cantidad de datos está limitada a 1000 de forma predeterminada por la API del BCRA. Si desea una configuración personalizada, instale pyBCRAdata y descargue manualmente los datos."
+            ),
+        ),
+    )
+
+
 def create_area_chart(data, color="#8884d8", labelx="fecha", labely="valor"):
     """
     Create a reusable area chart with consistent styling
@@ -84,12 +97,22 @@ def render_selector(
     return rx.center(
         rx.vstack(
             rx.text(title, size="4", weight="bold", color=Color.ALTBG),
-            rx.select(
-                options,
-                on_change=on_select,
-                value=displayed_value,
-                placeholder=placeholder,
-                width='100%',
+            rx.hstack(
+                rx.box(
+                    rx.select(
+                        options,
+                        on_change=on_select,
+                        value=displayed_value,
+                        placeholder=placeholder,
+                        width='100%',
+                    ),
+                    width="85%",
+                ),
+                hover_icon(),
+                rx.icon("arrow-down-to-line", color="indigo"),
+                spacing="3",
+                align_items="center",
+                width="100%",
             ),
             rx.hstack(
                 rx.text("Desde:", size="2", weight="bold", color_scheme="iris"),
@@ -115,7 +138,7 @@ def render_selector(
                     size="2",
                 ),
                 style={
-                    "flex_direction": ["column", "column", "row", "row", "row"]
+                    "flex_direction": ["column", "column", "column", "row", "row"]
                 },
                 spacing="3",
                 justify="center",

@@ -1,6 +1,7 @@
 import reflex as rx
 
 def about_content() -> rx.Component:
+    """Generate the about content."""
     return rx.markdown(
         """
 # Acerca de pyBCRAdata

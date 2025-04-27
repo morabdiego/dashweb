@@ -1,6 +1,7 @@
 import reflex as rx
 
-def md_install() -> rx.Component:
+def install_content() -> rx.Component:
+    """Generate the installation content."""
     return rx.markdown(
         """
         # **Instalación de pyBCRA**

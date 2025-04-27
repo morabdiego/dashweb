@@ -111,6 +111,35 @@ class MonetaryState(rx.State):
         
         # Actualizar los datos
         self._fetch_data()
+        
+    @rx.event
+    def download_csv(self):
+        """Descarga los datos actuales como un archivo CSV."""
+        try:
+            # Verificar que la clave seleccionada existe en el diccionario
+            if self.selected_item in variable_dict:
+                id_variable = variable_dict[self.selected_item]
+                
+                # Obtener datos
+                df = monetary.series(
+                    id_variable=id_variable,
+                    desde=self.start_date,
+                    hasta=self.end_date
+                )
+                
+                # Preparar para descarga
+                if isinstance(df, pd.DataFrame):
+                    csv_data = df.to_csv(index=False)
+                    return rx.download(
+                        data=csv_data,
+                        filename="data_query.csv"
+                    )
+                else:
+                    print("No data available for download")
+            else:
+                print(f"Selected item '{self.selected_item}' not found in variable dictionary")
+        except Exception as e:
+            print(f"Error downloading CSV: {e}")
 
 class CurrencyState(rx.State):
     """Estado para gráficos de monedas."""
@@ -125,7 +154,7 @@ class CurrencyState(rx.State):
     temp_selected_item: str = DEFAULT_CURRENCY_ITEM
     temp_start_date: str = DEFAULT_START_DATE
     temp_end_date: str = DEFAULT_END_DATE
-   
+
     def _fetch_data(self):
         """Fetch currency data based on current state."""
         try:
@@ -192,3 +221,32 @@ class CurrencyState(rx.State):
         
         # Actualizar los datos
         self._fetch_data()
+        
+    @rx.event
+    def download_csv(self):
+        """Descarga los datos actuales como un archivo CSV."""
+        try:
+            # Verificar que la clave seleccionada existe en el diccionario
+            if self.selected_item in currency_dict:
+                moneda = currency_dict[self.selected_item]
+                
+                # Obtener datos
+                df = currency.series(
+                    moneda=moneda,
+                    fechadesde=self.start_date,
+                    fechahasta=self.end_date
+                )
+                
+                # Preparar para descarga
+                if isinstance(df, pd.DataFrame):
+                    csv_data = df.to_csv(index=False)
+                    return rx.download(
+                        data=csv_data,
+                        filename="data_query.csv"
+                    )
+                else:
+                    print("No data available for download")
+            else:
+                print(f"Selected item '{self.selected_item}' not found in currency dictionary")
+        except Exception as e:
+            print(f"Error downloading CSV: {e}")
