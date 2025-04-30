@@ -1,35 +1,18 @@
 import reflex as rx
 from pyBCRAdata import monetary, currency
-import datetime
 import pandas as pd
 
-# Preparar listas y diccionario
-variables = monetary.variables()
-list_id = variables['idVariable'].to_list()
-list_label = variables['descripcion'].to_list()
-variable_dict = {}
-# Crear el diccionario de forma segura (asegurándose de que las claves sean hashables)
-for label, id_var in zip(list_label, list_id):
-    if isinstance(label, (str, int, float, bool, tuple)):
-        variable_dict[label] = id_var
-
-# Preparar listas y diccionario para monedas
-currencies = currency.currencies()
-currency_codes = currencies['codigo'].to_list()
-currency_names = currencies['denominacion'].to_list()
-currency_dict = {}
-# Crear el diccionario de forma segura para monedas
-for name, code in zip(currency_names, currency_codes):
-    if isinstance(name, (str, int, float, bool, tuple)):
-        currency_dict[name] = code
-
-# Valor por defecto en caso de que no haya opciones válidas en la lista
-DEFAULT_MONETARY_ITEM = list_label[0] if list_label and isinstance(list_label[0], (str, int, float, bool, tuple)) else "Base Monetaria"
-DEFAULT_CURRENCY_ITEM = currency_names[36] if len(currency_names) > 36 and isinstance(currency_names[36], (str, int, float, bool, tuple)) else "Dólar estadounidense"
-
-# Fechas predeterminadas
-DEFAULT_START_DATE = datetime.date(datetime.date.today().year, 1, 1).strftime('%Y-%m-%d')
-DEFAULT_END_DATE = datetime.date.today().strftime('%Y-%m-%d')
+# Importar constantes
+from dashweb.constants import (
+    MONETARY_DICT as variable_dict,
+    MONETARY_LABELS as list_label,
+    CURRENCY_DICT as currency_dict,
+    CURRENCY_NAMES as currency_names,
+    DEFAULT_MONETARY_ITEM,
+    DEFAULT_CURRENCY_ITEM,
+    DEFAULT_START_DATE,
+    DEFAULT_END_DATE
+)
 
 class MonetaryState(rx.State):
     """Estado para gráficos monetarios."""
