@@ -1,0 +1,7 @@
+1. char_componentets -> eliminar el legacy
+2. [LISTO] button aplicar cambios -> cambiar comportamiento: gris cuando no hay cambios, iris cuando si
+3. button download -> conectar lógica
+4. datatable for mobile
+5. fix sidebar in mobile
+5. texts revision
+6. revision del patron de diseño

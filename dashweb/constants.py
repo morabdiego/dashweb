@@ -27,5 +27,3 @@ DEFAULT_END_DATE = datetime.date.today().strftime('%Y-%m-%d')
 # Default selection constants
 DEFAULT_MONETARY_ITEM = MONETARY_LABELS[0]
 DEFAULT_CURRENCY_ITEM = CURRENCY_NAMES[36]
-
-print(MONETARY_VARIABLES)

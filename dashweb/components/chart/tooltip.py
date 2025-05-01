@@ -6,7 +6,7 @@ def hover_icon():
     """
     return rx.hover_card.root(
         rx.hover_card.trigger(
-            rx.icon("badge_info", color="indigo"),
+            rx.icon("badge_info", color="indigo", size=24),  # Tamaño fijo agregado
         ),
         rx.hover_card.content(
             rx.text(

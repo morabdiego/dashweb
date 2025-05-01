@@ -31,29 +31,31 @@ def render_selector(
         placeholder: Placeholder text for dropdown
         has_pending_changes: Reflex Var indicating if there are unapplied changes
     """
-    # Determinar el texto del botón según si hay cambios sin aplicar
+    # Determinar el texto del botón según si hay sin aplicar
     button_text = rx.cond(
         has_pending_changes,
-        "*Aplicar cambios",
-        "Aplicar cambios"
+        "*Aplicar",
+        "Aplicar"
+    )
+
+    # Determinar el estado del botón (disabled o no)
+    button_disabled = rx.cond(
+        has_pending_changes,
+        False,
+        True
     )
     
     return rx.center(
         rx.vstack(
             rx.text(title, size="4", weight="bold", color=Color.ALTBG),
             rx.hstack(
-                rx.box(
                     rx.select(
                         options,
                         on_change=on_select,
                         value=displayed_value,
                         placeholder=placeholder,
                         width='100%',
-                    ),
-                    width="85%",
                 ),
-                hover_icon(),
-                rx.icon("arrow-down-to-line", color="indigo"),
                 spacing="3",
                 align_items="center",
                 width="100%",
@@ -66,7 +68,6 @@ def render_selector(
                     on_change=on_start_date_change,
                     width=["100%", "100%", "auto", "auto", "auto"]
                 ),
-                rx.spacer(),
                 rx.text("Hasta:", size="2", weight="bold", color_scheme="iris"),
                 rx.input(
                     type="date",
@@ -74,12 +75,22 @@ def render_selector(
                     on_change=on_end_date_change,
                     width=["100%", "100%", "auto", "auto", "auto"]
                 ),
+                rx.flex(
+                    hover_icon(),
+                    rx.icon("arrow-down-to-line", color="indigo", size=24),
+                    width="64px",
+                    height="32px",
+                    align="center",
+                    justify="center",
+                    padding="2",
+                ),
                 rx.spacer(),
                 rx.button(
                     button_text,
                     on_click=on_apply_changes,
                     color_scheme="violet", 
                     size="2",
+                    disabled=button_disabled
                 ),
                 style={
                     "flex_direction": ["column", "column", "column", "row", "row"]
