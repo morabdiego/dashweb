@@ -2,7 +2,9 @@ import reflex as rx
 
 from dashweb.styles import Color
 from dashweb.state.chart_state import MonetaryState, variable_dict, list_label
-from dashweb.components.chart_components import create_area_chart, create_selector, create_chart_card, render_selector, handle_selector_logic
+from dashweb.components.chart.area_chart import create_area_chart
+from dashweb.components.chart.selector import render_selector, handle_selector_logic
+from dashweb.components.chart.chart_card import create_chart_card
 
 def chart():
     """Generate monetary statistics chart"""

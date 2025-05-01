@@ -1,6 +1,6 @@
 # navbar.py
 import reflex as rx
-from dashweb.components.nav_components import logo, navlinks, docslinks, get_nav_panel_styles
+from dashweb.components.layout.nav_components import logo, navlinks, docslinks, get_nav_panel_styles
 
 def navbar() -> rx.Component:
     """A vertical navbar assembled from reusable components."""

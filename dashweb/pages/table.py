@@ -1,6 +1,6 @@
 import reflex as rx
 
-from dashweb.components.layout import layout
+from dashweb.components.layout.layout import layout
 from dashweb.views.monetary import monetary_card
 from dashweb.views.currency import currency_card
 from dashweb.state import MonetaryState, CurrencyState

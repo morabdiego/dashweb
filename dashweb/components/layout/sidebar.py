@@ -1,23 +1,8 @@
-# sidebar.py
 import reflex as rx
-from dashweb.styles import Color
-from dashweb.components.nav_components import logo, navlinks, docslinks, get_nav_panel_styles
 
-class sidebar_state(rx.State):
-    abierto: bool = False
-    
-    @rx.event
-    def toggle(self):
-        self.abierto = not self.abierto
-    
-    @rx.event
-    def close(self):
-        self.abierto = False
-       
-    @rx.event
-    def navigate(self, url: str):
-        self.abierto = False
-        return rx.redirect(url)
+from dashweb.styles import Color
+from dashweb.components.layout.nav_components import logo, navlinks, docslinks, get_nav_panel_styles
+from dashweb.state.layout_state import sidebar_state
 
 def navbar_toggle_button() -> rx.Component:
     """Botón para mostrar/ocultar la barra de navegación en dispositivos móviles."""
@@ -30,7 +15,7 @@ def navbar_toggle_button() -> rx.Component:
             top="1.5em",
             left="1.5em",
             z_index="1100",
-            display=["block", "block", "none"],  # Solo mostrar en móviles
+            display=["block", "block", "none"],  # Solo mostrar en móviles, ocultar en desktop
             bg="transparent",
             color=Color.TEXT.value,
             _hover={"bg": Color.ACCENT.value},
@@ -75,7 +60,7 @@ def sidebar() -> rx.Component:
                     transition="opacity 0.3s ease-in-out",
                 )
             ),
-            display=["block", "block", "none"],  # Solo mostrar en móviles
+            display=["block", "block", "none"],  # Solo mostrar en móviles, ocultar en desktop
         ),
         None
     )

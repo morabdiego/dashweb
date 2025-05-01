@@ -1,13 +1,13 @@
 # layout.py
 import reflex as rx
-from dashweb.components.navbar import navbar
-from dashweb.components.sidebar import navbar_toggle_button, sidebar
-from dashweb.components.footer import footer
+from dashweb.components.layout.navbar import navbar
+from dashweb.components.layout.sidebar import navbar_toggle_button, sidebar
+from dashweb.components.layout.footer import footer
 
 def layout(*children: rx.Component) -> rx.Component:
-    """Layout responsivo que utiliza navbar fijo en escritorio y solapa en móviles."""
+    """Layout responsivo que utiliza navbar fijo en escritorio y sidebar en móviles."""
     return rx.box(
-        # Componentes para dispositivos móviles (solapa)
+        # Componentes para dispositivos móviles (sidebar)
         navbar_toggle_button(),
         sidebar(),
        
@@ -27,8 +27,8 @@ def layout(*children: rx.Component) -> rx.Component:
             height="calc(100vh - 40px)",
             overflow_y="auto",
             padding="2rem",
-            margin_left=["0px", "0px", "250px"],  # Sin margen en móviles, con margen en desktop
-            transition="margin-left 0.3s ease-in-out",
+            margin_left=["0px", "0px", "250px"],  # Margen fijo en desktop para el navbar
+            transition="margin-left 0.4s ease-in-out",
         ),
        
         # Footer
