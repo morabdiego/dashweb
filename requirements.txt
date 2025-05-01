@@ -1,2 +1,2 @@
-pyBCRAdata==0.4.3
+pyBCRAdata==0.4.4
 reflex==0.7.7
