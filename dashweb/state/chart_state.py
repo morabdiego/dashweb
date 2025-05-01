@@ -4,10 +4,10 @@ import pandas as pd
 
 # Importar constantes
 from dashweb.constants import (
-    MONETARY_DICT as variable_dict,
-    MONETARY_LABELS as list_label,
-    CURRENCY_DICT as currency_dict,
-    CURRENCY_NAMES as currency_names,
+    MONETARY_DICT,
+    MONETARY_LABELS,
+    CURRENCY_DICT,
+    CURRENCY_NAMES,
     DEFAULT_MONETARY_ITEM,
     DEFAULT_CURRENCY_ITEM,
     DEFAULT_START_DATE,
@@ -32,8 +32,8 @@ class MonetaryState(rx.State):
         """Fetch monetary data based on current state."""
         try:
             # Verificar que la clave seleccionada existe en el diccionario
-            if self.selected_item in variable_dict:
-                id_variable = variable_dict[self.selected_item]
+            if self.selected_item in MONETARY_DICT:
+                id_variable = MONETARY_DICT[self.selected_item]
                 
                 # Obtener datos y procesarlos de manera segura
                 df = monetary.series(
@@ -100,8 +100,8 @@ class MonetaryState(rx.State):
         """Descarga los datos actuales como un archivo CSV."""
         try:
             # Verificar que la clave seleccionada existe en el diccionario
-            if self.selected_item in variable_dict:
-                id_variable = variable_dict[self.selected_item]
+            if self.selected_item in MONETARY_DICT:
+                id_variable = MONETARY_DICT[self.selected_item]
                 
                 # Obtener datos
                 df = monetary.series(
@@ -142,8 +142,8 @@ class CurrencyState(rx.State):
         """Fetch currency data based on current state."""
         try:
             # Verificar que la clave seleccionada existe en el diccionario
-            if self.selected_item in currency_dict:
-                moneda = currency_dict[self.selected_item]
+            if self.selected_item in CURRENCY_DICT:
+                moneda = CURRENCY_DICT[self.selected_item]
                 
                 # Obtener datos y procesarlos de manera segura
                 df = currency.series(
@@ -210,8 +210,8 @@ class CurrencyState(rx.State):
         """Descarga los datos actuales como un archivo CSV."""
         try:
             # Verificar que la clave seleccionada existe en el diccionario
-            if self.selected_item in currency_dict:
-                moneda = currency_dict[self.selected_item]
+            if self.selected_item in CURRENCY_DICT:
+                moneda = CURRENCY_DICT[self.selected_item]
                 
                 # Obtener datos
                 df = currency.series(
