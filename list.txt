@@ -6,4 +6,4 @@
     1.[LISTO] Breakpoints
     2. button
 5. texts revision
-6. revision del patron de diseño
+6. [LISTO] revision del patron de diseño

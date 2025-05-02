@@ -17,7 +17,7 @@ MOBILE_BREAKPOINT = "600px"  # sm
 
 STYLE = {
     "font_family": "JetBrains Mono",
-    "font_size": "18px",
+    "font_size": "17px",
     "background": Color.BG.value,
     "color": Color.TEXT.value,
         rx.select: {

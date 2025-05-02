@@ -84,7 +84,8 @@ def render_selector(
                         "arrow-down-to-line",
                         color="indigo",
                         size=24,
-                        on_click=on_download
+                        on_click=on_download,
+                        style={"cursor": "pointer"}
                         ),
                     width="60px",
                     height="32px",
