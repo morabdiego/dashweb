@@ -1,6 +1,12 @@
 import reflex as rx
+from typing import List, Dict, Any
 
-def create_area_chart(data, color="#8884d8", labelx="fecha", labely="valor"):
+def create_area_chart(
+    data: List[Dict[str, Any]], 
+    color: str = "#8884d8", 
+    labelx: str = "fecha", 
+    labely: str = "valor"
+) -> rx.Component:
     """
     Create a reusable area chart with consistent styling
     

@@ -1,7 +1,7 @@
 import reflex as rx
 from dashweb.styles import Color
 
-def create_chart_card(selector, chart):
+def create_chart_card(selector: rx.Component, chart: rx.Component) -> rx.Component:
     """
     Create a card containing a selector and chart
     

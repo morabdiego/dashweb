@@ -1,21 +1,22 @@
 import reflex as rx
+from typing import List, Dict, Any, Optional, Callable, Union
 from dashweb.styles import Color
 from dashweb.components.chart.tooltip import hover_icon
 
 def render_selector(
-    title, 
-    options, 
-    displayed_value, 
-    on_select, 
-    displayed_start_date,
-    on_start_date_change,
-    displayed_end_date,
-    on_end_date_change,
-    on_apply_changes,
-    on_download=None,
-    placeholder="Select...",
-    has_pending_changes=None
-):
+    title: str, 
+    options: List[str], 
+    displayed_value: str, 
+    on_select: Callable[[str], Any], 
+    displayed_start_date: str,
+    on_start_date_change: Callable[[str], Any],
+    displayed_end_date: str,
+    on_end_date_change: Callable[[str], Any],
+    on_apply_changes: Callable[[], Any],
+    on_download: Optional[Callable[[], Any]] = None,
+    placeholder: str = "Select...",
+    has_pending_changes: Optional[Union[bool, rx.Var[bool]]] = None
+) -> rx.Component:
     """
     Render the selector component UI with date range inputs and apply button
     
@@ -113,21 +114,21 @@ def render_selector(
     )
 
 def handle_selector_logic(
-    internal_value,
-    internal_start_date,
-    internal_end_date,
-    displayed_value,
-    displayed_start_date,
-    displayed_end_date,
-    update_internal_value,
-    update_internal_start_date,
-    update_internal_end_date,
-    update_displayed_value,
-    update_displayed_start_date,
-    update_displayed_end_date,
-    on_data_change=None,
-    on_download=None
-):
+    internal_value: str,
+    internal_start_date: str,
+    internal_end_date: str,
+    displayed_value: str,
+    displayed_start_date: str,
+    displayed_end_date: str,
+    update_internal_value: Callable[[str], Any],
+    update_internal_start_date: Callable[[str], Any],
+    update_internal_end_date: Callable[[str], Any],
+    update_displayed_value: Callable[[str], Any],
+    update_displayed_start_date: Callable[[str], Any],
+    update_displayed_end_date: Callable[[str], Any],
+    on_data_change: Optional[Callable[[], Any]] = None,
+    on_download: Optional[Callable[[], Any]] = None
+) -> Dict[str, Callable]:
     """
     Handle the selector logic, separating internal state from displayed state
     

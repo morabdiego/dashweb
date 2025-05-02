@@ -1,6 +1,7 @@
 # components/nav_components.py
 """Componentes reutilizables para la navegación."""
 import reflex as rx
+from typing import Dict, Any, Optional
 from dashweb.styles import Color
 
 def logo() -> rx.Component:
@@ -30,7 +31,7 @@ def navitem(icon: str, text: str, href: str) -> rx.Component:
         href: The URL to navigate to when clicked
     """
     is_active = rx.State.router.page.path == href
-   
+    
     return rx.link(
         rx.hstack(
             rx.icon(
@@ -123,7 +124,7 @@ def docslinks() -> rx.Component:
     )
 
 # Estilos compartidos
-def get_nav_panel_styles(is_sidebar=False):
+def get_nav_panel_styles(is_sidebar: bool = False) -> Dict[str, Any]:
     """Return common styling for navigation panels."""
     styles = {
         "position": "fixed",

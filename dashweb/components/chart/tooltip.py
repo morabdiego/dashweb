@@ -1,6 +1,6 @@
 import reflex as rx
 
-def hover_icon():
+def hover_icon() -> rx.Component:
     """
     Creates a hover icon with information tooltip
     """

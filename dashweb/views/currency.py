@@ -1,18 +1,21 @@
 import reflex as rx
+from typing import Dict, Any
 
-from dashweb.styles import Color
 from dashweb.state.chart_state import CurrencyState
 from dashweb.constants import CURRENCY_NAMES, CURRENCY_DICT
 from dashweb.components.chart.area_chart import create_area_chart
 from dashweb.components.chart.selector import render_selector, handle_selector_logic
 from dashweb.components.chart.chart_card import create_chart_card
 
-def currency_chart():
+def currency_chart() -> rx.Component:
     """Generate currency exchange chart"""
-    return create_area_chart(data=CurrencyState.data, color="#8884d8",
-                             labely="detalle_tipoCotizacion")
+    return create_area_chart(
+        data=CurrencyState.data,
+        color="#8884d8",
+        labely="detalle_tipoCotizacion"
+        )
 
-def currency_selector():
+def currency_selector() -> rx.Component:
     """Generate currency exchange selector using the new separated approach"""
     # Calcular si hay cambios pendientes directamente
     has_pending_changes = (
@@ -22,7 +25,7 @@ def currency_selector():
     )
     
     # Generar los event handlers utilizando la lógica separada
-    handlers = handle_selector_logic(
+    handlers: Dict[str, Any] = handle_selector_logic(
         internal_value=CurrencyState.selected_item,
         internal_start_date=CurrencyState.start_date,
         internal_end_date=CurrencyState.end_date,
@@ -55,7 +58,7 @@ def currency_selector():
         has_pending_changes=has_pending_changes
     )
 
-def currency_card():
+def currency_card() -> rx.Component:
     """Generate complete currency exchange card"""
     return create_chart_card(
         selector=currency_selector(),

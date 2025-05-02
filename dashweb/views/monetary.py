@@ -1,4 +1,5 @@
 import reflex as rx
+from typing import Dict, Any
 
 from dashweb.styles import Color
 from dashweb.state.chart_state import MonetaryState
@@ -7,11 +8,11 @@ from dashweb.components.chart.area_chart import create_area_chart
 from dashweb.components.chart.selector import render_selector, handle_selector_logic
 from dashweb.components.chart.chart_card import create_chart_card
 
-def chart():
+def chart() -> rx.Component:
     """Generate monetary statistics chart"""
     return create_area_chart(data=MonetaryState.data, color="#8884d8")
 
-def chart_selector():
+def chart_selector() -> rx.Component:
     """Generate monetary statistics selector using the new separated approach"""
     # Calcular si hay cambios pendientes directamente
     has_pending_changes = (
@@ -21,7 +22,7 @@ def chart_selector():
     )
     
     # Generar los event handlers utilizando la lógica separada
-    handlers = handle_selector_logic(
+    handlers: Dict[str, Any] = handle_selector_logic(
         internal_value=MonetaryState.selected_item,
         internal_start_date=MonetaryState.start_date,
         internal_end_date=MonetaryState.end_date,
@@ -54,7 +55,7 @@ def chart_selector():
         has_pending_changes=has_pending_changes
     )
 
-def monetary_card():
+def monetary_card() -> rx.Component:
     """Generate complete monetary statistics card"""
     return create_chart_card(
         selector=chart_selector(),

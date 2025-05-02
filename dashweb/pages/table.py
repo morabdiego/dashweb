@@ -1,4 +1,5 @@
 import reflex as rx
+from typing import List
 
 from dashweb.components.layout.layout import layout
 from dashweb.views.monetary import monetary_card

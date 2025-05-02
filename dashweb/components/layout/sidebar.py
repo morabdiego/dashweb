@@ -1,10 +1,11 @@
 import reflex as rx
+from typing import Optional
 
 from dashweb.styles import Color
 from dashweb.components.layout.nav_components import logo, navlinks, docslinks, get_nav_panel_styles
 from dashweb.state.layout_state import sidebar_state
 
-def navbar_toggle_button() -> rx.Component:
+def navbar_toggle_button() -> Optional[rx.Component]:
     """Botón para mostrar/ocultar la barra de navegación en dispositivos móviles."""
     return rx.cond(
         ~sidebar_state.abierto,
@@ -24,7 +25,7 @@ def navbar_toggle_button() -> rx.Component:
         None
     )
 
-def sidebar() -> rx.Component:
+def sidebar() -> Optional[rx.Component]:
     """Menú desplegable para dispositivos móviles."""
     return rx.cond(
         sidebar_state.abierto,

@@ -1,6 +1,7 @@
 import reflex as rx
 from pyBCRAdata import monetary, currency
 import pandas as pd
+from typing import List, Dict, Any, Optional
 
 # Importar constantes
 from dashweb.constants import (
@@ -17,7 +18,7 @@ from dashweb.constants import (
 class MonetaryState(rx.State):
     """Estado para gráficos monetarios."""
     selected_item: str = DEFAULT_MONETARY_ITEM
-    data: list[dict] = []
+    data: List[Dict[str, Any]] = []
     
     # Valores actuales mostrados en la UI
     start_date: str = DEFAULT_START_DATE
@@ -28,7 +29,7 @@ class MonetaryState(rx.State):
     temp_start_date: str = DEFAULT_START_DATE
     temp_end_date: str = DEFAULT_END_DATE
     
-    def _fetch_data(self):
+    def _fetch_data(self) -> None:
         """Fetch monetary data based on current state."""
         try:
             # Verificar que la clave seleccionada existe en el diccionario
@@ -61,7 +62,7 @@ class MonetaryState(rx.State):
             self.data = []
     
     @rx.event
-    def on_load(self):
+    def on_load(self) -> None:
         """Fetch data on component load."""
         # Al cargar, inicializamos los valores temporales con los valores actuales
         self.temp_selected_item = self.selected_item
@@ -70,22 +71,22 @@ class MonetaryState(rx.State):
         self._fetch_data()
     
     @rx.event
-    def set_selected_item(self, value: str):
+    def set_selected_item(self, value: str) -> None:
         """Actualiza el valor temporal del ítem seleccionado."""
         self.temp_selected_item = value
     
     @rx.event
-    def set_start_date(self, date: str):
+    def set_start_date(self, date: str) -> None:
         """Actualiza el valor temporal de la fecha de inicio."""
         self.temp_start_date = date
     
     @rx.event
-    def set_end_date(self, date: str):
+    def set_end_date(self, date: str) -> None:
         """Actualiza el valor temporal de la fecha de fin."""
         self.temp_end_date = date
     
     @rx.event
-    def apply_changes(self):
+    def apply_changes(self) -> None:
         """Aplica los cambios temporales y actualiza los datos."""
         # Actualizar los valores reales
         self.selected_item = self.temp_selected_item
@@ -123,11 +124,12 @@ class MonetaryState(rx.State):
                 print(f"Selected item '{self.selected_item}' not found in variable dictionary")
         except Exception as e:
             print(f"Error downloading CSV: {e}")
+            return None
 
 class CurrencyState(rx.State):
     """Estado para gráficos de monedas."""
     selected_item: str = DEFAULT_CURRENCY_ITEM
-    data: list[dict] = []
+    data: List[Dict[str, Any]] = []
     
     # Valores actuales mostrados en la UI
     start_date: str = DEFAULT_START_DATE
@@ -138,7 +140,7 @@ class CurrencyState(rx.State):
     temp_start_date: str = DEFAULT_START_DATE
     temp_end_date: str = DEFAULT_END_DATE
 
-    def _fetch_data(self):
+    def _fetch_data(self) -> None:
         """Fetch currency data based on current state."""
         try:
             # Verificar que la clave seleccionada existe en el diccionario
@@ -171,7 +173,7 @@ class CurrencyState(rx.State):
             self.data = []
     
     @rx.event
-    def on_load(self):
+    def on_load(self) -> None:
         """Fetch data on component load."""
         # Al cargar, inicializamos los valores temporales con los valores actuales
         self.temp_selected_item = self.selected_item
@@ -180,22 +182,22 @@ class CurrencyState(rx.State):
         self._fetch_data()
     
     @rx.event
-    def set_selected_item(self, value: str):
+    def set_selected_item(self, value: str) -> None:
         """Actualiza el valor temporal del ítem seleccionado."""
         self.temp_selected_item = value
     
     @rx.event
-    def set_start_date(self, date: str):
+    def set_start_date(self, date: str) -> None:
         """Actualiza el valor temporal de la fecha de inicio."""
         self.temp_start_date = date
        
     @rx.event
-    def set_end_date(self, date: str):
+    def set_end_date(self, date: str) -> None:
         """Actualiza el valor temporal de la fecha de fin."""
         self.temp_end_date = date
     
     @rx.event
-    def apply_changes(self):
+    def apply_changes(self) -> None:
         """Aplica los cambios temporales y actualiza los datos."""
         # Actualizar los valores reales
         self.selected_item = self.temp_selected_item
@@ -233,3 +235,4 @@ class CurrencyState(rx.State):
                 print(f"Selected item '{self.selected_item}' not found in currency dictionary")
         except Exception as e:
             print(f"Error downloading CSV: {e}")
+            return None
