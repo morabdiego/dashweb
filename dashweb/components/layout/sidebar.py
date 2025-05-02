@@ -10,17 +10,17 @@ def navbar_toggle_button() -> Optional[rx.Component]:
     return rx.cond(
         ~sidebar_state.abierto,
         rx.button(
-            rx.icon("circle-chevron-right"),
+            rx.icon("panel-left-open", size=30, color="indigo"),
             on_click=sidebar_state.toggle,
             position="fixed",
-            top="1.5em",
-            left="1.5em",
+            bottom="3em",
+            left="2.5em",
             z_index="1100",
-            display=["block", "block", "none"],  # Solo mostrar en móviles, ocultar en desktop
-            bg="transparent",
+            display=["block", "block", "none"],
+            bg=Color.TEXT.value,
             color=Color.TEXT.value,
             _hover={"bg": Color.ACCENT.value},
-            size="2",
+            transition="all 0.8s cubic-bezier(0.22, 1, 0.36, 1)",  # Añadir transición suave al botón
         ),
         None
     )
@@ -35,8 +35,16 @@ def sidebar() -> Optional[rx.Component]:
                 rx.box(
                     rx.vstack(
                         logo(),
-                        navlinks(),
-                        docslinks(),
+                        # Wrap navlinks with onClick handler to close sidebar when any link is clicked
+                        rx.box(
+                            navlinks(),
+                            on_click=sidebar_state.close,
+                        ),
+                        # Wrap docslinks with onClick handler to close sidebar when any link is clicked
+                        rx.box(
+                            docslinks(),
+                            on_click=sidebar_state.close,
+                        ),
                         height="100vh",
                         justify="between"
                     ),
@@ -58,10 +66,11 @@ def sidebar() -> Optional[rx.Component]:
                     bg="rgba(0,0,0,0.5)",
                     z_index="900",
                     opacity="1",
-                    transition="opacity 0.3s ease-in-out",
+                    transition="opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1)",
                 )
             ),
             display=["block", "block", "none"],  # Solo mostrar en móviles, ocultar en desktop
+            transition="all 0.8s cubic-bezier(0.22, 1, 0.36, 1)",  # Transición general para el contenedor
         ),
         None
     )

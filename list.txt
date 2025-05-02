@@ -2,8 +2,8 @@
 2. [LISTO] button aplicar cambios -> cambiar comportamiento: gris cuando no hay cambios, iris cuando si
 3. [LISTO] button download -> conectar lógica
 4. datatable for mobile
-5. fix sidebar in mobile
+5. [LISTO] fix sidebar in mobile
     1.[LISTO] Breakpoints
-    2. button
+    2. [LISTO] button
 5. texts revision
 6. [LISTO] revision del patron de diseño

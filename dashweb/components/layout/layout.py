@@ -12,13 +12,13 @@ def layout(*children: rx.Component) -> rx.Component:
         # Componentes para dispositivos móviles (sidebar)
         navbar_toggle_button(),
         sidebar(),
-       
+
         # Navbar fijo para pantallas grandes
         rx.box(
             navbar(),
             display=["none", "none", "block"],  # Ocultar en móviles, mostrar en desktop
         ),
-       
+
         # Contenido principal
         rx.box(
             rx.grid(
@@ -30,9 +30,8 @@ def layout(*children: rx.Component) -> rx.Component:
             overflow_y="auto",
             padding="2rem",
             margin_left=["0px", "0px", "250px"],  # Margen fijo en desktop para el navbar
-            transition="margin-left 0.4s ease-in-out",
-        ),
-       
+            transition="margin-left 0.8s cubic-bezier(0.4, 0, 0.2, 1)",        ),
+        
         # Footer
         footer(),
     )
