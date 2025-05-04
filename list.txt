@@ -8,5 +8,5 @@
 5. [LISTO] texts revision
 6. [LISTO] revision del patron de diseño
 7. [LISTO PARA DESPLIEGUE] Ajustar deploy options for vercel/render
-8. [] Escala de CHART
+8. [LISTO] Escala de CHART. 
 9. [] Revisión final , export y deploy

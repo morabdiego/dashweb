@@ -40,6 +40,7 @@ def create_area_chart(
         rx.recharts.y_axis(
             data_key=labely,
             interval='preserveEnd',
+            domain=['auto', 'auto'],
         ), 
         rx.recharts.graphing_tooltip(), 
         data=data,
