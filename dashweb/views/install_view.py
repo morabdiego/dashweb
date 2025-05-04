@@ -4,8 +4,12 @@ def install_content() -> rx.Component:
     """Generate the installation content."""
     return rx.markdown(
         """
+        # **PyBCRAdata dashboard**
+        
+        Esta web fue desarrollada con el framework [Reflex](https://reflex.dev/) y el paquete [pyBCRAdata](https://pypi.org/project/pyBCRAdata/) y es un ejemplo de cómo utilizar la librería para acceder a datos del Banco Central de la República Argentina (BCRA).
+        
         # **Instalación de pyBCRA**
-        **Cliente Python** para acceder a estadísticas monetarias, datos de tipo de cambio e información de deudores publicados por el **Banco Central de la República Argentina (BCRA)**.
+        **Con el paquete de PyPI** podrás acceder a estadísticas monetarias, datos de tipo de cambio e información de deudores publicados por el **Banco Central de la República Argentina (BCRA)** y utilizarlo en tu proyecto.
 
         ### 🛆 Instalación
         Para instalar la librería, ejecuta el siguiente comando en tu terminal:
@@ -22,7 +26,9 @@ def install_content() -> rx.Component:
 
         ### 📊 Ejemplo Rápido
         ```python
-        from pyBCRAdata import monetary, currency, checks, debtors
+        from pyBCRAdata import (
+        monetary, currency, checks, debtors
+        )
 
         # Obtener variables monetarias
         variables = monetary.variables()
@@ -47,7 +53,8 @@ def install_content() -> rx.Component:
 
         # Obtener tasa de política monetaria
         df = client.monetary.series(
-            id_variable="6",  # Tasa de Política Monetaria (en % n.a.)
+            # Tasa de Política Monetaria (en % n.a.)
+            id_variable="6",
             desde="2024-01-01",
             hasta="2024-03-21"
         )

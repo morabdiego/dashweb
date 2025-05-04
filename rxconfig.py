@@ -1,17 +1,17 @@
 import reflex as rx
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-# Cargar variables de entorno desde .env (solo en desarrollo local)
-# En Render, las variables se cargan automáticamente desde la configuración del servicio
-load_dotenv()
+# # Cargar variables de entorno desde .env (solo en desarrollo local)
+# # En Render, las variables se cargan automáticamente desde la configuración del servicio
+# load_dotenv()
 
-# Obtener API URL desde variables de entorno
-api_url = os.getenv("API_URL")
+# # Obtener API URL desde variables de entorno
+# api_url = os.getenv("API_URL")
 
-# Verificación de que API_URL está definida
-if not api_url:
-    raise ValueError("API_URL environment variable is not set. Please define it in your .env file or environment.")
+# # Verificación de que API_URL está definida
+# if not api_url:
+#     raise ValueError("API_URL environment variable is not set. Please define it in your .env file or environment.")
 
 config = rx.Config(
     app_name="dashweb",

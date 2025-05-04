@@ -6,20 +6,54 @@ def about_content() -> rx.Component:
         """
 # Acerca de pyBCRAdata
 
-Este sitio web utiliza la librería **pyBCRAdata**, una herramienta de Python diseñada para acceder a las APIs del Banco Central de la República Argentina (BCRA).
+Este sitio web es una demostración de cómo utilizar **[pyBCRAdata](https://pypi.org/project/pyBCRAdata/)**, una librería de Python diseñada para facilitar el acceso a las APIs públicas del Banco Central de la República Argentina (BCRA). Desarrollado íntegramente en Python con [Reflex](https://reflex.dev/), este dashboard interactivo permite obtener y visualizar datos económicos de manera eficiente y reproducible.
 
 ## ¿Qué es pyBCRAdata?
 
-`pyBCRAdata` es una librería que permite a los desarrolladores interactuar fácilmente con las APIs del BCRA para obtener datos económicos y financieros. Esto incluye información sobre tasas de interés, tipos de cambio, indicadores monetarios, entre otros.
+`pyBCRAdata` proporciona una interfaz sencilla para interactuar con las APIs oficiales del BCRA, que forman parte de su estrategia de Open Finance. Estas APIs ofrecen acceso a información clave como:
 
-## Propósito de este sitio
+- **Principales Variables**: series estadísticas del Informe Monetario Diario, incluyendo datos sobre base monetaria, reservas internacionales, tasas de interés, entre otros.
+- **Estadísticas Cambiarias**: cotizaciones de divisas y su evolución histórica.
+- **Cheques Denunciados**: información sobre cheques denunciados como extraviados, sustraídos o adulterados.
+- **Central de Deudores**: datos consolidados sobre financiaciones otorgadas y cheques rechazados por CUIT/CUIL/CDI.
 
-El objetivo de este sitio es demostrar cómo se pueden descargar y visualizar estos datos en un dashboard interactivo. Utilizando `pyBCRAdata`, puedes:
+Estas interfaces están diseñadas para integrarse fácilmente en diversas plataformas y sistemas, permitiendo automatizar análisis frecuentes y mejorar la accesibilidad a la información financiera ([bcra.gob.ar](https://www.bcra.gob.ar/BCRAyVos/catalogo-de-APIs-banco-central.asp?)).
 
-- Acceder a datos económicos en tiempo real.
+## Objetivo del sitio
+
+Este dashboard interactivo tiene como finalidad ilustrar cómo se pueden descargar y visualizar datos económicos en un entorno 100% Python. A través de `pyBCRAdata` y Reflex, es posible:
+
+- Acceder a datos económicos de forma sencilla.
 - Crear visualizaciones personalizadas.
-- Analizar tendencias y generar insights.
+- Si desea querys personalizados acceder directamente a `pyBCRAdata` en local
 
-Este dashboard es un ejemplo práctico de cómo aprovechar la librería para construir aplicaciones útiles y dinámicas.
+A continuación, se muestra un ejemplo básico del código utilizado para obtener y visualizar una serie de las Reservas Internacionales del BCRA:
+
+```python
+import reflex as rx
+from pyBCRAdata import monetary
+
+from web.components.area_chart import chart_generator
+
+# Obtener datos de la API
+df = monetary.series(
+    # Reservas internacionales en millones de dólares
+    id_variable="1",
+    desde="2025-01-01",
+    hasta="2025-04-01"
+)[["fecha", "valor"]]  # Filtrar columnas relevantes
+
+# Adaptar datos para el módulo de gráficos de Reflex
+data_to_chart = df.to_dict(orient="records")
+
+# Con un estilo predefinido anteriormente, creamos el gráfico
+def reservas_internacionales_viz() -> rx.Component:
+    return chart_generator(
+        data=data_to_chart,
+        color="#8884d8"
+    )
+```
+
+Este ejemplo muestra cómo, con unas pocas líneas de código, se puede construir una visualización interactiva directamente desde Python, sin necesidad de herramientas web como HTML, CSS o JavaScript.
     """
     )

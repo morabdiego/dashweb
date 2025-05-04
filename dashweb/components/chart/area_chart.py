@@ -35,19 +35,19 @@ def create_area_chart(
             angle=90,
             interval='preserveEnd',
             text_anchor='start',
-            min_tick_gap=15,
+            min_tick_gap=20,
         ), 
         rx.recharts.y_axis(
             data_key=labely,
-            angle=45
+            interval='preserveEnd',
         ), 
         rx.recharts.graphing_tooltip(), 
         data=data,
-        height=600,
+        height=550,
         margin={
-            "top": 50,
-            "right": 50,
-            "bottom": 110,
-            "left": 50,
+            "top": 10,
+            "right": 10,
+            "bottom": 80,
+            "left": 10
         },
     )
