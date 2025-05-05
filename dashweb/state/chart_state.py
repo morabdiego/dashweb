@@ -86,15 +86,34 @@ class MonetaryState(rx.State):
         self.temp_end_date = date
     
     @rx.event
-    def apply_changes(self) -> None:
-        """Aplica los cambios temporales y actualiza los datos."""
-        # Actualizar los valores reales
+    def apply_changes(self):
+        # Verificar que las fechas no sean iguales
+        if self.temp_start_date == self.temp_end_date:
+            return rx.toast.error(
+                "Error: Las fechas no pueden ser iguales",
+                position="top-center",
+                close_button=True,
+                )
+        
+        # Verificar que la fecha de inicio sea anterior a la fecha de fin
+        if self.temp_start_date > self.temp_end_date:
+            return rx.toast.error(
+                "Error: 'Desde' debe ser anterior a 'Hasta'",
+                position="top-center",
+                close_button=True,
+                )
+        
+        # Si pasó las validaciones, actualizar los datos
         self.selected_item = self.temp_selected_item
         self.start_date = self.temp_start_date
         self.end_date = self.temp_end_date
-        
-        # Actualizar los datos
         self._fetch_data()
+        
+        return rx.toast.success(
+            "Datos actualizados correctamente",
+            position="top-center",
+            close_button=True,
+            )
         
     @rx.event
     def download_csv(self):
@@ -190,22 +209,41 @@ class CurrencyState(rx.State):
     def set_start_date(self, date: str) -> None:
         """Actualiza el valor temporal de la fecha de inicio."""
         self.temp_start_date = date
-       
+    
     @rx.event
     def set_end_date(self, date: str) -> None:
         """Actualiza el valor temporal de la fecha de fin."""
         self.temp_end_date = date
     
     @rx.event
-    def apply_changes(self) -> None:
-        """Aplica los cambios temporales y actualiza los datos."""
-        # Actualizar los valores reales
+    def apply_changes(self):
+        # Verificar que las fechas no sean iguales
+        if self.temp_start_date == self.temp_end_date:
+            return rx.toast.error(
+                "Error: Las fechas no pueden ser iguales",
+                position="top-center",
+                close_button=True,
+                )
+        
+        # Verificar que la fecha de inicio sea anterior a la fecha de fin
+        if self.temp_start_date > self.temp_end_date:
+            return rx.toast.error(
+                "Error: 'Desde' debe ser anterior a 'Hasta'",
+                position="top-center",
+                close_button=True,
+                )
+        
+        # Si pasó las validaciones, actualizar los datos
         self.selected_item = self.temp_selected_item
         self.start_date = self.temp_start_date
         self.end_date = self.temp_end_date
-        
-        # Actualizar los datos
         self._fetch_data()
+        
+        return rx.toast.success(
+            "Datos actualizados correctamente",
+            position="top-center",
+            close_button=True,
+            )
         
     @rx.event
     def download_csv(self):

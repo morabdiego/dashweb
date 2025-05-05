@@ -9,4 +9,6 @@
 6. [LISTO] revision del patron de diseño
 7. [LISTO PARA DESPLIEGUE] Ajustar deploy options for vercel/render
 8. [LISTO] Escala de CHART. 
-9. [] Revisión final , export y deploy
+9. [Validación de datos] + Toasts
+10. [] revisión de states
+11. [] Revisión final , export y deploy
