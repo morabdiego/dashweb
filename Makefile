@@ -10,7 +10,8 @@ run:
 	. .venv/bin/activate && reflex run
 
 frontend: build
-	. .venv/bin/activate && reflex export --frontend-only
+	. .venv/bin/activate
+	API_URL="https://pybcradata-dashboard-production.up.railway.app" reflex export --frontend-only
 	rm -rf public/
 	mkdir -p public/
 	unzip -o frontend.zip -d public/
